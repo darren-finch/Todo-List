@@ -1,0 +1,51 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="backgroundColor">@color/colorBackground</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="android:background">"@color/colorPrimary"</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <style name="LightHeader" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textColor">@color/colorTextLight</item>
+    </style>
+    <style name="H1Light" parent="LightHeader">
+        <item name="android:textSize">32sp</item>
+    </style>
+    <style name="H2Light" parent="LightHeader">
+        <item name="android:textSize">28sp</item>
+    </style>
+    <style name="H3Light" parent="LightHeader">
+        <item name="android:textSize">22sp</item>
+    </style>
+    <style name="H4Light" parent="LightHeader">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="DarkHeader" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textColor">@color/colorTextDark</item>
+    </style>
+    <style name="H1Dark" parent="DarkHeader">
+        <item name="android:textSize">32sp</item>
+    </style>
+    <style name="H2Dark" parent="DarkHeader">
+        <item name="android:textSize">28sp</item>
+    </style>
+    <style name="H3Dark" parent="DarkHeader">
+        <item name="android:textSize">22sp</item>
+    </style>
+    <style name="H4Dark" parent="DarkHeader">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorTextLessDark</item>
+    </style>
+
+</resources>

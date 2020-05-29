@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Potential color schemes -->
+<!--    ["07beb8","3dccc7","68d8d6","9ceaef","c4fff9"]-->
+<!--    ["a30b37","bd6b73","bbb6df","c6c8ee","fcfcff"]-->
+<!--    ["d9f0ff","a3d5ff","83c9f4","6f73d2","7681b3"]-->
+    <color name="colorPrimary">#7681b3</color>
+    <color name="colorPrimaryVariant">#6f73d2</color>
+    <color name="colorSecondary">#83c9f4</color>
+    <color name="colorBackground">#C8DCE6</color>
+    <color name="colorOnPrimary">#FFF</color>
+    <color name="colorTextLight">#FFF</color>
+    <color name="colorTextDark">#404040</color>
+    <color name="colorTextLessDark">#595959</color>
+</resources>
