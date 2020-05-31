@@ -4,8 +4,8 @@ import android.graphics.Paint
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.darrenfinch.todolist.databinding.TaskItemBinding
-import com.darrenfinch.todolist.model.Task
-import com.darrenfinch.todolist.view.helpers.AnimationUtils
+import com.darrenfinch.todolist.model.room.Task
+import com.darrenfinch.todolist.view.helpers.ExpandCollapseViewAnimator
 
 class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 {
@@ -27,13 +27,12 @@ class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
         if(!taskIsComplete)
         {
             if(isExpanded)
-                AnimationUtils.collapse(binding.taskDetails)
+                ExpandCollapseViewAnimator.collapse(binding.taskDetails)
             else
-                AnimationUtils.expand(binding.taskDetails)
+                ExpandCollapseViewAnimator.expand(binding.taskDetails)
             isExpanded = !isExpanded
         }
     }
-    fun cardCanBeClicked() = !taskIsComplete
     private fun setTaskDisabledStyle()
     {
         binding.taskNameTextView.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG

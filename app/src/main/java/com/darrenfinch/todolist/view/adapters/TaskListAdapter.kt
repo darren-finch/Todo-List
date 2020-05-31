@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.darrenfinch.todolist.R
-import com.darrenfinch.todolist.model.Task
+import com.darrenfinch.todolist.model.room.Task
 
 class TaskListAdapter : RecyclerView.Adapter<TaskViewHolder>()
 {
@@ -13,6 +13,7 @@ class TaskListAdapter : RecyclerView.Adapter<TaskViewHolder>()
     {
         allTasks.clear()
         allTasks.addAll(newTasks)
+
         notifyDataSetChanged()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder

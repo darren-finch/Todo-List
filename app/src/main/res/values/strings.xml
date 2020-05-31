@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Todo List</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="uncompleted_tasks">Uncompleted Tasks</string>
     <string name="completed_tasks">Completed Tasks</string>
     <string name="estimated_ttc_time_to_complete">Estimated TTC (time to complete):</string>
     <string name="task_description_header">Task Description:</string>
+    <string name="view_more">View More</string>
 </resources>

@@ -12,8 +12,7 @@ import com.darrenfinch.todolist.R
 import com.darrenfinch.todolist.databinding.FragmentCompletedTasksBinding
 import com.darrenfinch.todolist.view.adapters.TaskListAdapter
 import com.darrenfinch.todolist.view.helpers.MarginItemDecoration
-import com.darrenfinch.todolist.view.helpers.Utils
-import kotlinx.android.synthetic.main.fragment_completed_tasks.*
+import com.darrenfinch.todolist.view.helpers.ExampleTasksCreator
 
 class CompletedTasksFragment : Fragment()
 {
@@ -32,7 +31,8 @@ class CompletedTasksFragment : Fragment()
             tasksRecyclerView.adapter = adapter
             tasksRecyclerView.layoutManager = LinearLayoutManager(context)
             tasksRecyclerView.addItemDecoration(MarginItemDecoration(16))
-            adapter.updateTasks(Utils.getSampleCompletedTasks())
+
+            adapter.updateTasks(ExampleTasksCreator.getSampleCompletedTasks())
         }
         return binding.root
     }

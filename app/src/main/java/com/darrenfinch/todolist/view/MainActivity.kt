@@ -21,10 +21,11 @@ class MainActivity : AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.tabLayout.addTab(binding.tabLayout.newTab().apply { text = "Uncompleted Tasks" })
-        binding.tabLayout.addTab(binding.tabLayout.newTab().apply { text = "Completed Tasks" })
-        binding.viewPager.adapter = TaskFragmentViewPagerAdapter(supportFragmentManager)
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
+        binding.apply {
+            viewPager.adapter = TaskFragmentViewPagerAdapter(supportFragmentManager)
+            tabLayout.setupWithViewPager(binding.viewPager)
+        }
     }
 }

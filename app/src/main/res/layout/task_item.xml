@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.darrenfinch.todolist.view.helpers.TimeUtils"/>
+        <import type="com.darrenfinch.todolist.view.helpers.TimeUtil"/>
         <variable
             name="task"
-            type="com.darrenfinch.todolist.model.Task" />
+            type="com.darrenfinch.todolist.model.room.Task" />
         <variable
             name="viewHolder"
             type="com.darrenfinch.todolist.view.adapters.TaskViewHolder" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:clickable="@{viewHolder.cardCanBeClicked()}"
+        android:clickable="@{!task.isComplete}"
         android:onClick="@{() -> viewHolder.inverseExpandedWithAnimation()}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -36,6 +36,7 @@
                     android:layout_height="wrap_content"
                     android:focusable="true"
                     android:checked="@{task.isComplete}"
+                    android:clickable="@{!task.isComplete}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/standard_margin"
-                    android:text="@{TimeUtils.INSTANCE.dateStringFromLong(task.scheduledDate)}"
+                    android:text="@{TimeUtil.INSTANCE.dateStringFromLong(task.scheduledDate)}"
                     android:textAppearance="@style/H4LessDark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/viewMoreButton"
@@ -72,6 +73,7 @@
                     android:background="#00FFFFFF"
                     android:src="@drawable/ic_more"
                     android:tint="@color/colorTextDark"
+                    android:contentDescription="@string/view_more"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -104,7 +106,7 @@
                     android:id="@+id/estimatedTTC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{TimeUtils.INSTANCE.putTogetherTimeAndUnit(task.estimatedTTC, task.estimatedTTCUnit)}"
+                    android:text="@{TimeUtil.INSTANCE.putTogetherTimeAndUnit(task.estimatedTTC, task.estimatedTTCUnit)}"
                     app:layout_constraintBottom_toBottomOf="@+id/textView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView"
