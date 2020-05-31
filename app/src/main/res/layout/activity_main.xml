@@ -1,63 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar"
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ToolbarStyle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".view.MainActivity">
 
-        <TextView
-            style="@style/H2"
-            android:text="@string/app_name"
-            android:gravity="center"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.appbar.MaterialToolbar>
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/standard_padding"
-        android:layout_marginTop="@dimen/standard_padding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/uncompleted_tasks" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/completed_tasks" />
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/materialToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ToolbarStyle"
+                app:title="@string/app_name"
+                app:titleTextColor="@color/colorTextLight">
 
-    </com.google.android.material.tabs.TabLayout>
+            </com.google.android.material.appbar.MaterialToolbar>
 
-    <fragment
-        android:id="@+id/container"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/standard_padding"
-        android:background="@color/colorBackground"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-        app:navGraph="@navigation/nav_main" />
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

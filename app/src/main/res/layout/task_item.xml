@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="com.darrenfinch.todolist.view.helpers.TimeUtils"/>
+        <variable
+            name="task"
+            type="com.darrenfinch.todolist.model.Task" />
+        <variable
+            name="viewHolder"
+            type="com.darrenfinch.todolist.view.adapters.TaskViewHolder" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:clickable="@{viewHolder.cardCanBeClicked()}"
+        android:onClick="@{() -> viewHolder.inverseExpandedWithAnimation()}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardTop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <CheckBox
+                    android:id="@+id/taskCompletedCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:checked="@{task.isComplete}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/taskNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{task.name}"
+                    android:textAppearance="@style/H3Dark"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/scheduledDate"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/taskCompletedCheckBox"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Task Name" />
+
+                <TextView
+                    android:id="@+id/scheduledDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/standard_margin"
+                    android:text="@{TimeUtils.INSTANCE.dateStringFromLong(task.scheduledDate)}"
+                    android:textAppearance="@style/H4LessDark"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/viewMoreButton"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="5/20/20" />
+
+                <ImageButton
+                    android:id="@+id/viewMoreButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/standard_margin"
+                    android:background="#00FFFFFF"
+                    android:src="@drawable/ic_more"
+                    android:tint="@color/colorTextDark"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/taskDetails"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/standard_padding"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardTop">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/standard_margin"
+                    android:text="@string/estimated_ttc_time_to_complete"
+                    android:textAppearance="@style/H4LessDark"
+                    app:layout_constraintEnd_toStartOf="@+id/estimatedTTC"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/estimatedTTC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{TimeUtils.INSTANCE.putTogetherTimeAndUnit(task.estimatedTTC, task.estimatedTTCUnit)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView"
+                    tools:text="3hr" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/standard_margin"
+                    android:text="@string/task_description_header"
+                    android:textAppearance="@style/H4LessDark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/taskDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/standard_margin"
+                    android:text="@{task.description}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    tools:text="This is the task description that actually doesn't do anything right now. I'm just making sure this works." />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

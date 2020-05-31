@@ -1,7 +1,8 @@
 package com.darrenfinch.todolist.model
 
-data class Task(val taskName: String,
+data class Task(val name: String,
                 val scheduledDate: Long,
                 val estimatedTTC: Int,
                 val estimatedTTCUnit: TimeUnit,
-                val taskDescription: String)
+                val description: String,
+                val isComplete: Boolean = false)
