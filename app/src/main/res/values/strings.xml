@@ -11,4 +11,6 @@
     <string name="edit_task">Edit Task</string>
     <string name="task_name">Task Name</string>
     <string name="scheduled_date">Scheduled Date</string>
+    <string name="marked_task_as_incomplete">Marked task as incomplete.</string>
+    <string name="marked_task_as_complete">Marked task as complete.</string>
 </resources>

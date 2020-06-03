@@ -9,7 +9,7 @@ import com.darrenfinch.todolist.databinding.TaskItemBinding
 import com.darrenfinch.todolist.model.room.Task
 import com.darrenfinch.todolist.view.helpers.ExpandCollapseViewAnimator
 
-class TaskViewHolder(val listener: TaskViewHolder.Listener, private val expandCollapseViewAnimator: ExpandCollapseViewAnimator, itemView: View) : RecyclerView.ViewHolder(itemView)
+class TaskViewHolder(val listener: TaskViewHolder.Listener, itemView: View) : RecyclerView.ViewHolder(itemView)
 {
     private var binding = TaskItemBinding.bind(itemView)
     private var isExpanded = false
@@ -44,9 +44,9 @@ class TaskViewHolder(val listener: TaskViewHolder.Listener, private val expandCo
         if (!taskIsComplete)
         {
             if (isExpanded)
-                expandCollapseViewAnimator.collapse(binding.taskDetails)
+                ExpandCollapseViewAnimator.collapse(binding.taskDetails)
             else
-                expandCollapseViewAnimator.expand(binding.taskDetails)
+                ExpandCollapseViewAnimator.expand(binding.taskDetails)
             isExpanded = !isExpanded
         }
     }

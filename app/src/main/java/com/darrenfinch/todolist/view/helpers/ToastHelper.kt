@@ -3,7 +3,7 @@ package com.darrenfinch.todolist.view.helpers
 import android.content.Context
 import android.widget.Toast
 
-class ToastHelper
+object ToastHelper
 {
     fun makeShortToast(context: Context, message: String)
     {

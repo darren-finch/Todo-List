@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Transformation
 
-class ExpandCollapseViewAnimator
+object ExpandCollapseViewAnimator
 {
     fun expand(viewBeingAnimated: View)
     {

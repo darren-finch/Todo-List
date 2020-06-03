@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -44,6 +45,7 @@ class IncompleteTasksFragment : Fragment()
         override fun onTaskFinished(taskId: Int)
         {
             incompleteTasksViewModel.completeTask(taskId)
+            Toast.makeText(context, getString(R.string.marked_task_as_complete), Toast.LENGTH_SHORT).show()
         }
         override fun onTaskUnfinished(taskId: Int) { }
         override fun onTaskEdit(taskId: Int)
@@ -90,11 +92,13 @@ class IncompleteTasksFragment : Fragment()
         setupDependencies()
         setupViewModel()
     }
-    override fun onStart()
+    //Observing the view model is necessary to do in onResume because incomplete and completed tasks can change rapidly.
+    override fun onResume()
     {
-        super.onStart()
+        super.onResume()
         observeViewModel()
     }
+
     //DON'T USE ANY FIELDS WITH @INJECT BEFORE THIS METHOD IS CALLED.
     private fun setupDependencies()
     {

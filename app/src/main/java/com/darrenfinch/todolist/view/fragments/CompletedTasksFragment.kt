@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -39,6 +40,7 @@ class CompletedTasksFragment : Fragment()
         override fun onTaskUnfinished(taskId: Int)
         {
             completedTasksViewModel.uncompleteTask(taskId)
+            Toast.makeText(context, getString(R.string.marked_task_as_incomplete), Toast.LENGTH_SHORT).show()
         }
         override fun onTaskFinished(taskId: Int) {}
         override fun onTaskEdit(taskId: Int) {}
@@ -70,9 +72,10 @@ class CompletedTasksFragment : Fragment()
         setupDependencies()
         setupViewModel()
     }
-    override fun onStart()
+    //Observing the view model is necessary to do in onResume because incomplete and completed tasks can change rapidly.
+    override fun onResume()
     {
-        super.onStart()
+        super.onResume()
         observeViewModel()
     }
 

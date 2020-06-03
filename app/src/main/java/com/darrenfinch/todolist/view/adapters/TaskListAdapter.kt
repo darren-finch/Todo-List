@@ -11,9 +11,6 @@ class TaskListAdapter(private val taskViewHolderListener: TaskViewHolder.Listene
 {
     private val allTasks = mutableListOf<Task>()
 
-    //This could be injected, but it's not necessary. This adapter can't be unit tested anyways.
-    private val expandCollapseViewAnimator = ExpandCollapseViewAnimator()
-
     fun updateTasks(newTasks: List<Task>)
     {
         allTasks.clear()
@@ -25,7 +22,6 @@ class TaskListAdapter(private val taskViewHolderListener: TaskViewHolder.Listene
     {
         return TaskViewHolder(
             taskViewHolderListener,
-            expandCollapseViewAnimator,
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.task_item, parent, false)
         )
