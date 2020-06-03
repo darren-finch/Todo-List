@@ -1,4 +1,4 @@
-package com.darrenfinch.todolist.view.fragments
+package com.darrenfinch.todolist.view.helpers
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable

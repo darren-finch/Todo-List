@@ -24,6 +24,7 @@ import com.darrenfinch.todolist.view.helpers.MarginItemDecoration
 import com.darrenfinch.todolist.view.helpers.ToastHelper
 import com.darrenfinch.todolist.viewmodel.IncompleteTasksViewModel
 import com.darrenfinch.todolist.viewmodel.IncompleteTasksViewModelFactory
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 const val DEFAULT_EDIT_FRAGMENT_TASK_ID = -1
@@ -42,12 +43,9 @@ class IncompleteTasksFragment : Fragment()
     {
         override fun onTaskFinished(taskId: Int)
         {
-//            incompleteTasksViewModel.completeTask(taskId)
+            incompleteTasksViewModel.completeTask(taskId)
         }
-        override fun onTaskUnfinished(taskId: Int)
-        {
-//            TODO("Not yet implemented")
-        }
+        override fun onTaskUnfinished(taskId: Int) { }
         override fun onTaskEdit(taskId: Int)
         {
             navigateToEditTask(taskId)
@@ -90,6 +88,11 @@ class IncompleteTasksFragment : Fragment()
     {
         super.onActivityCreated(savedInstanceState)
         setupDependencies()
+        setupViewModel()
+    }
+    override fun onStart()
+    {
+        super.onStart()
         observeViewModel()
     }
     //DON'T USE ANY FIELDS WITH @INJECT BEFORE THIS METHOD IS CALLED.
@@ -108,7 +111,9 @@ class IncompleteTasksFragment : Fragment()
             )
             .build()
             .inject(this)
-
+    }
+    private fun setupViewModel()
+    {
         incompleteTasksViewModel = ViewModelProvider(viewModelStore, incompleteTasksViewModelFactory).get(IncompleteTasksViewModel::class.java)
     }
     private fun observeViewModel()

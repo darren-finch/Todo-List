@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.darrenfinch.todolist.model.TaskRepository
 import com.darrenfinch.todolist.model.room.Task
-import com.darrenfinch.todolist.view.fragments.ObservableTask
+import com.darrenfinch.todolist.view.helpers.ObservableTask
 
 class EditTaskViewModel(private val repository: TaskRepository, application: Application) : AndroidViewModel(application)
 {

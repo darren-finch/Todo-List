@@ -36,7 +36,6 @@
                     android:layout_height="wrap_content"
                     android:focusable="true"
                     android:checked="@{task.isComplete}"
-                    android:clickable="@{!task.isComplete}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,6 +73,7 @@
                     android:src="@drawable/ic_more"
                     android:tint="@color/colorTextDark"
                     android:contentDescription="@string/view_more"
+                    android:clickable="@{!task.isComplete}"
                     android:onClick="@{() -> viewHolder.showPopupMenu()}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
