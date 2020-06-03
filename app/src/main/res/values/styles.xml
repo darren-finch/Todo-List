@@ -2,15 +2,19 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="colorSecondary">@color/colorSecondary</item>
         <item name="backgroundColor">@color/colorBackground</item>
+        <item name="textInputStyle">@style/TextInput</item>
     </style>
 
-    <style name="ToolbarStyle" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+    <style name="PrimaryToolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="android:background">?attr/colorSurface</item>
+    </style>
+    <style name="TextInput" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="boxBackgroundColor">#FFF</item>
     </style>
 
     <style name="LightHeader" parent="TextAppearance.AppCompat.Large">

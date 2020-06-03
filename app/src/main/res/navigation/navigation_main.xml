@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/allTasksViewPagerFragment">
+
+    <fragment
+        android:id="@+id/allTasksViewPagerFragment"
+        android:name="com.darrenfinch.todolist.view.fragments.AllTasksViewPagerFragment"
+        android:label="AllTasksViewPagerFragment" >
+        <action
+            android:id="@+id/action_allTasksViewPagerFragment_to_editTasksFragment"
+            app:destination="@id/editTasksFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTasksFragment"
+        android:name="com.darrenfinch.todolist.view.fragments.EditTaskFragment"
+        android:label="fragment_edit_tasks"
+        tools:layout="@layout/fragment_edit_task" >
+        <argument
+            android:name="taskId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+</navigation>

@@ -6,7 +6,7 @@ import java.util.*
 
 object ExampleTasksCreator
 {
-    fun getSampleUncompletedTasks() : List<Task>
+    fun getSampleIncompleteTasks() : List<Task>
     {
         return listOf(
             Task(

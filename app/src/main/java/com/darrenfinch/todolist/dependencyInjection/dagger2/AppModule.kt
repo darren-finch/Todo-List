@@ -1,4 +1,4 @@
-package com.darrenfinch.todolist.dependencyInjection
+package com.darrenfinch.todolist.dependencyInjection.dagger2
 
 import android.app.Application
 import dagger.Module

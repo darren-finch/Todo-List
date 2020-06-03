@@ -1,4 +1,4 @@
-package com.darrenfinch.todolist.view.helpers
+package com.darrenfinch.todolist.view.helpers.databinding
 
 import com.darrenfinch.todolist.model.TimeUnit
 import java.text.DateFormat

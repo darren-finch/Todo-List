@@ -5,10 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.darrenfinch.todolist.R
 import com.darrenfinch.todolist.model.room.Task
+import com.darrenfinch.todolist.view.helpers.ExpandCollapseViewAnimator
 
-class TaskListAdapter : RecyclerView.Adapter<TaskViewHolder>()
+class TaskListAdapter(private val taskViewHolderListener: TaskViewHolder.Listener) : RecyclerView.Adapter<TaskViewHolder>()
 {
     private val allTasks = mutableListOf<Task>()
+
+    //This could be injected, but it's not necessary. This adapter can't be unit tested anyways.
+    private val expandCollapseViewAnimator = ExpandCollapseViewAnimator()
+
     fun updateTasks(newTasks: List<Task>)
     {
         allTasks.clear()
@@ -18,12 +23,16 @@ class TaskListAdapter : RecyclerView.Adapter<TaskViewHolder>()
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder
     {
-        return TaskViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.task_item, parent, false))
+        return TaskViewHolder(
+            taskViewHolderListener,
+            expandCollapseViewAnimator,
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.task_item, parent, false)
+        )
     }
     override fun getItemCount() = allTasks.size
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int)
     {
         holder.bind(allTasks[position])
     }
-
 }

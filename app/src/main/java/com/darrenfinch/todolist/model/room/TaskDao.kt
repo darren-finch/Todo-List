@@ -5,20 +5,18 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import io.reactivex.Observable
-import io.reactivex.Single
 
 @Dao
 interface TaskDao
 {
     @Query("SELECT * FROM tasks WHERE isComplete = 1")
-    fun getCompletedTasks() : Observable<List<Task>>
+    fun getCompletedTasks() : LiveData<List<Task>>
 
     @Query("SELECT * FROM tasks WHERE isComplete = 0")
-    fun getIncompleteTasks() : Observable<List<Task>>
+    fun getIncompleteTasks() : LiveData<List<Task>>
 
-    @Query("SELECT 1 FROM tasks WHERE taskId = :taskId")
-    fun getTask(taskId: Int) : Single<Task>
+    @Query("SELECT * FROM tasks WHERE taskId = :taskId")
+    fun getTask(taskId: Int) : LiveData<Task>
 
     @Insert
     suspend fun insertTask(task: Task)

@@ -1,8 +1,9 @@
-package com.darrenfinch.todolist.dependencyInjection
+package com.darrenfinch.todolist.dependencyInjection.dagger2
 
 import android.app.Application
 import androidx.room.Room
 import com.darrenfinch.todolist.model.TaskRepository
+import com.darrenfinch.todolist.model.room.TaskDao
 import com.darrenfinch.todolist.model.room.TaskDatabase
 import dagger.Module
 import dagger.Provides
@@ -21,5 +22,9 @@ class RoomModule(application: Application)
 
     @Singleton
     @Provides
-    fun provideRepository(database: TaskDatabase) = TaskRepository(database.taskDao())
+    fun provideDao() = taskDatabase.taskDao()
+
+    @Singleton
+    @Provides
+    fun provideRepository(dao: TaskDao) = TaskRepository(dao)
 }

@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">Todo List</string>
-    <string name="uncompleted_tasks">Uncompleted Tasks</string>
     <string name="completed_tasks">Completed Tasks</string>
-    <string name="estimated_ttc_time_to_complete">Estimated TTC (time to complete):</string>
-    <string name="task_description_header">Task Description:</string>
+    <string name="incomplete_tasks">Incomplete Tasks</string>
+    <string name="time_to_complete_label">Time To Complete</string>
+    <string name="task_description_header">Task Description</string>
     <string name="view_more">View More</string>
+    <string name="database_error">There was an error getting data from the database.</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="task_name_hint">Task Name</string>
+    <string name="scheduled_date_label">Scheduled Date</string>
+    <string name="task_description_hint">Task Description</string>
 </resources>

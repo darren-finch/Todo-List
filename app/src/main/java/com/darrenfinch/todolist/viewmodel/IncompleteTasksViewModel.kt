@@ -9,5 +9,7 @@ class IncompleteTasksViewModel
 @Inject
 constructor(private val repository: TaskRepository, application: Application) : AndroidViewModel(application)
 {
-
+    fun getTasks() = repository.getIncompleteTasks()
+    fun completeTask(taskId: Int) = repository.completeTask(taskId)
+    fun deleteTask(taskId: Int) = repository.deleteTask(taskId)
 }

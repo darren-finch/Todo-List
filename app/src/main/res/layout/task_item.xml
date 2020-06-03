@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.darrenfinch.todolist.view.helpers.TimeUtil"/>
+        <import type="com.darrenfinch.todolist.view.helpers.databinding.TimeUtil"/>
         <variable
             name="task"
             type="com.darrenfinch.todolist.model.room.Task" />
@@ -74,6 +74,7 @@
                     android:src="@drawable/ic_more"
                     android:tint="@color/colorTextDark"
                     android:contentDescription="@string/view_more"
+                    android:onClick="@{() -> viewHolder.showPopupMenu()}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -95,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/standard_margin"
-                    android:text="@string/estimated_ttc_time_to_complete"
+                    android:text="@string/time_to_complete_label"
                     android:textAppearance="@style/H4LessDark"
                     app:layout_constraintEnd_toStartOf="@+id/estimatedTTC"
                     app:layout_constraintHorizontal_bias="0.0"

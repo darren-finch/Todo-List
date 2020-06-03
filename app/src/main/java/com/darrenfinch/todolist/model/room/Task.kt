@@ -1,12 +1,14 @@
 package com.darrenfinch.todolist.model.room
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.darrenfinch.todolist.model.TimeUnit
 
 @Entity(tableName = "tasks")
 data class Task(@PrimaryKey(autoGenerate = true)
-                val taskId: Int, //I've prefixed this with "task" to keep my sql queries sane. The other variables should not be prefixed with "task".
+                @ColumnInfo(name = "taskId")
+                val id: Int,
                 val name: String,
                 val scheduledDate: Long,
                 val estimatedTTC: Int,

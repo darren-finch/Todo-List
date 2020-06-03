@@ -1,26 +1,21 @@
 package com.darrenfinch.todolist.view.adapters
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.darrenfinch.todolist.view.fragments.CompletedTasksFragment
 import com.darrenfinch.todolist.view.fragments.IncompleteTasksFragment
+import java.lang.IndexOutOfBoundsException
 
-class TaskFragmentViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+const val INCOMPLETE_TASKS_FRAGMENT_TAB_INDEX = 0
+const val COMPLETED_TASKS_FRAGMENT_TAB_INDEX = 1
+
+/*The structure for this class totally wasn't ripped off of Sunflower*/
+class TaskFragmentViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment)
 {
-    override fun getPageTitle(position: Int): CharSequence?
-    {
-        return if(position == 0)
-            "Incomplete Tasks"
-        else
-            "Completed Tasks"
-    }
-    override fun getItem(position: Int): Fragment
-    {
-        return if(position == 0)
-            IncompleteTasksFragment.newInstance()
-        else
-            CompletedTasksFragment.newInstance()
-    }
-    override fun getCount() = 2
+    private val tabIndexToFragmentMap: Map<Int, () -> Fragment> = mapOf(
+        INCOMPLETE_TASKS_FRAGMENT_TAB_INDEX to { IncompleteTasksFragment.newInstance() },
+        COMPLETED_TASKS_FRAGMENT_TAB_INDEX to {CompletedTasksFragment.newInstance() }
+    )
+    override fun getItemCount() = tabIndexToFragmentMap.size
+    override fun createFragment(position: Int) = tabIndexToFragmentMap[position]?.invoke() ?: throw IndexOutOfBoundsException()
 }

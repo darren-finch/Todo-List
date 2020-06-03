@@ -1,4 +1,4 @@
-package com.darrenfinch.todolist.dependencyInjection
+package com.darrenfinch.todolist.dependencyInjection.dagger2
 
 import android.app.Application
 import com.darrenfinch.todolist.model.TaskRepository
@@ -10,7 +10,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component()
+@Component(modules = [AppModule::class, RoomModule::class, ViewModelModule::class, UtilityModule::class])
 interface ApplicationComponent
 {
     fun inject(repository: TaskRepository) : TaskRepository

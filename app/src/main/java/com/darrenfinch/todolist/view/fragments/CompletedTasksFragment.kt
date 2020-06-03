@@ -11,12 +11,33 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.darrenfinch.todolist.R
 import com.darrenfinch.todolist.databinding.FragmentCompletedTasksBinding
 import com.darrenfinch.todolist.view.adapters.TaskListAdapter
+import com.darrenfinch.todolist.view.adapters.TaskViewHolder
 import com.darrenfinch.todolist.view.helpers.MarginItemDecoration
 import com.darrenfinch.todolist.view.helpers.ExampleTasksCreator
 
 class CompletedTasksFragment : Fragment()
 {
-    private val adapter = TaskListAdapter()
+    private val taskViewHolderListener = object : TaskViewHolder.Listener
+    {
+        override fun onTaskFinished(taskId: Int)
+        {
+            TODO("Not yet implemented")
+        }
+        override fun onTaskUnfinished(taskId: Int)
+        {
+            TODO("Not yet implemented")
+        }
+        override fun onTaskEdit(taskId: Int)
+        {
+            TODO("Not yet implemented")
+        }
+        override fun onTaskDelete(taskId: Int)
+        {
+            TODO("Not yet implemented")
+        }
+    }
+
+    private val adapter = TaskListAdapter(taskViewHolderListener)
     private lateinit var binding: FragmentCompletedTasksBinding
 
     companion object
