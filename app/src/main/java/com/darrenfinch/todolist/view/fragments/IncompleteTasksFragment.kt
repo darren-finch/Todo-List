@@ -21,14 +21,13 @@ import com.darrenfinch.todolist.dependencyInjection.dagger2.ViewModelFactoryModu
 import com.darrenfinch.todolist.model.room.Task
 import com.darrenfinch.todolist.view.adapters.TaskListAdapter
 import com.darrenfinch.todolist.view.adapters.TaskViewHolder
+import com.darrenfinch.todolist.view.helpers.DEFAULT_EDIT_FRAGMENT_TASK_ID
 import com.darrenfinch.todolist.view.helpers.MarginItemDecoration
 import com.darrenfinch.todolist.view.helpers.ToastHelper
 import com.darrenfinch.todolist.viewmodel.IncompleteTasksViewModel
 import com.darrenfinch.todolist.viewmodel.IncompleteTasksViewModelFactory
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-
-const val DEFAULT_EDIT_FRAGMENT_TASK_ID = -1
 
 class IncompleteTasksFragment : Fragment()
 {
@@ -39,6 +38,7 @@ class IncompleteTasksFragment : Fragment()
     private val tasksListObserver = Observer<List<Task>>
     { newTasks ->
         taskListAdapter.updateTasks(newTasks)
+        binding.noIncompleteTasksTextView.visibility = if(newTasks.isNotEmpty()) View.GONE else View.VISIBLE
     }
     private val taskViewHolderListener = object : TaskViewHolder.Listener
     {

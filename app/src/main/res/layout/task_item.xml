@@ -83,7 +83,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/taskDetails"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/standard_padding"
                 android:visibility="gone"

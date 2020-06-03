@@ -20,6 +20,7 @@ import com.darrenfinch.todolist.dependencyInjection.dagger2.AppModule
 import com.darrenfinch.todolist.dependencyInjection.dagger2.DaggerApplicationComponent
 import com.darrenfinch.todolist.dependencyInjection.dagger2.RoomModule
 import com.darrenfinch.todolist.model.TimeUnit
+import com.darrenfinch.todolist.view.helpers.DEFAULT_EDIT_FRAGMENT_TASK_ID
 import com.darrenfinch.todolist.viewmodel.EditTaskViewModel
 import com.darrenfinch.todolist.viewmodel.EditTaskViewModelFactory
 import java.util.*

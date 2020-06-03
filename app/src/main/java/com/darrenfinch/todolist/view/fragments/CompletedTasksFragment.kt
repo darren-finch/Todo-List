@@ -23,6 +23,8 @@ import com.darrenfinch.todolist.view.helpers.MarginItemDecoration
 import com.darrenfinch.todolist.view.helpers.ExampleTasksCreator
 import com.darrenfinch.todolist.viewmodel.CompletedTasksViewModel
 import com.darrenfinch.todolist.viewmodel.CompletedTasksViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class CompletedTasksFragment : Fragment()
@@ -34,6 +36,7 @@ class CompletedTasksFragment : Fragment()
     private val taskListObserver = Observer<List<Task>>
     { newTasks ->
         adapter.updateTasks(newTasks)
+        binding.noCompleteTasksTextView.visibility = if(newTasks.isNotEmpty()) View.GONE else View.VISIBLE
     }
     private val taskViewHolderListener = object : TaskViewHolder.Listener
     {
