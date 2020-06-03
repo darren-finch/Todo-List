@@ -6,6 +6,16 @@ import java.util.*
 
 object ExampleTasksCreator
 {
+    fun getEmptyTask() : Task
+    {
+        return Task(
+            name = "",
+            estimatedTTC = 0,
+            estimatedTTCUnit = TimeUnit.defaultUnit,
+            scheduledDate = System.currentTimeMillis(),
+            description = ""
+        )
+    }
     fun getSampleIncompleteTasks() : List<Task>
     {
         return listOf(
@@ -14,7 +24,7 @@ object ExampleTasksCreator
                 "Task 1",
                 getCurrentTime(),
                 1,
-                TimeUnit.HRS,
+                TimeUnit.defaultUnit,
                 "Task 1 Description"
             ),
             Task(
@@ -22,7 +32,7 @@ object ExampleTasksCreator
                 "Task 2",
                 getCurrentTime(),
                 2,
-                TimeUnit.HRS,
+                TimeUnit.defaultUnit,
                 "Task 2 Description"
             ),
             Task(
@@ -30,7 +40,7 @@ object ExampleTasksCreator
                 "Task 3",
                 getCurrentTime(),
                 3,
-                TimeUnit.HRS,
+                TimeUnit.defaultUnit,
                 "Task 3 Description"
             ),
             Task(
@@ -38,7 +48,7 @@ object ExampleTasksCreator
                 "Task 4",
                 getCurrentTime(),
                 4,
-                TimeUnit.HRS,
+                TimeUnit.defaultUnit,
                 "Task 4 Description"
             ),
             Task(
@@ -46,7 +56,7 @@ object ExampleTasksCreator
                 "Task 5",
                 getCurrentTime(),
                 5,
-                TimeUnit.HRS,
+                TimeUnit.defaultUnit,
                 "Task 5 Description"
             )
         )
@@ -59,7 +69,7 @@ object ExampleTasksCreator
                 "Task 1",
                 getCurrentTime(),
                 1,
-                TimeUnit.HRS,
+                TimeUnit.defaultUnit,
                 "Task 1 Description",
                 true
             ),
@@ -68,7 +78,7 @@ object ExampleTasksCreator
                 "Task 2",
                 getCurrentTime(),
                 2,
-                TimeUnit.HRS,
+                TimeUnit.defaultUnit,
                 "Task 2 Description",
                 true
             ),
@@ -77,7 +87,7 @@ object ExampleTasksCreator
                 "Task 3",
                 getCurrentTime(),
                 3,
-                TimeUnit.HRS,
+                TimeUnit.defaultUnit,
                 "Task 3 Description",
                 true
             ),
@@ -86,7 +96,7 @@ object ExampleTasksCreator
                 "Task 4",
                 getCurrentTime(),
                 4,
-                TimeUnit.HRS,
+                TimeUnit.defaultUnit,
                 "Task 4 Description",
                 true
             ),
@@ -95,16 +105,11 @@ object ExampleTasksCreator
                 "Task 5",
                 getCurrentTime(),
                 5,
-                TimeUnit.HRS,
+                TimeUnit.defaultUnit,
                 "Task 5 Description",
                 true
             )
         )
     }
-    fun getCurrentTime() = GregorianCalendar.getInstance().apply {
-        set(Calendar.HOUR_OF_DAY, 0)
-        set(Calendar.MINUTE, 0)
-        set(Calendar.SECOND, 0)
-        set(Calendar.MILLISECOND, 0)
-    }.timeInMillis
+    private fun getCurrentTime() = System.currentTimeMillis()
 }

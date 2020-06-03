@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.darrenfinch.todolist.view.helpers.databinding.TimeUtil"/>
+        <import type="com.darrenfinch.todolist.view.helpers.DatabindingUtil"/>
         <variable
             name="viewModel"
             type="com.darrenfinch.todolist.viewmodel.EditTaskViewModel" />
@@ -40,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/standard_margin"
-            android:hint="@string/task_name_hint"
+            android:hint="@string/task_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBar">
@@ -49,7 +49,7 @@
                 android:id="@+id/taskNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@{viewModel.observableTask.name}"/>
+                android:text="@={viewModel.observableTask.name}"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/standard_margin"
-            android:hint="@string/task_description_hint"
+            android:hint="@string/task_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/taskNameTextInputLayout">
@@ -67,7 +67,7 @@
                 android:id="@+id/taskDescriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@{viewModel.observableTask.description}"/>
+                android:text="@={viewModel.observableTask.description}"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/standard_padding"
-                android:text="@string/scheduled_date_label"
+                android:text="@string/scheduled_date"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/standard_margin"
                 android:layout_marginEnd="@dimen/standard_margin"
-                android:text="@{TimeUtil.INSTANCE.dateStringFromLong(viewModel.observableTask.scheduledDate)}"
+                android:text="@{DatabindingUtil.INSTANCE.dateStringFromLong(viewModel.observableTask.scheduledDate)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="5/21/20" />
@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/standard_padding"
-                android:text="@string/time_to_complete_label"
+                android:text="@string/time_to_complete"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/scheduledDateLabel" />
 
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/standard_margin"
                 android:layout_marginEnd="@dimen/standard_margin"
-                android:text="@{TimeUtil.INSTANCE.putTogetherTimeAndUnit(viewModel.observableTask.estimatedTTC, viewModel.observableTask.estimatedTTCUnit)}"
+                android:text="@{DatabindingUtil.INSTANCE.putTogetherTimeAndUnit(viewModel.observableTask.estimatedTTC, viewModel.observableTask.estimatedTTCUnit)}"
                 app:layout_constraintBottom_toBottomOf="@+id/timeToCompleteLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/timeToCompleteLabel"

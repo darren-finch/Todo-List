@@ -33,8 +33,6 @@ class IncompleteTasksFragment : Fragment()
     @Inject
     lateinit var incompleteTasksViewModelFactory: IncompleteTasksViewModelFactory
     private lateinit var incompleteTasksViewModel: IncompleteTasksViewModel
-    @Inject
-    lateinit var toastHelper: ToastHelper
 
     private val tasksListObserver = Observer<List<Task>>
     { newTasks ->
@@ -44,11 +42,11 @@ class IncompleteTasksFragment : Fragment()
     {
         override fun onTaskFinished(taskId: Int)
         {
-            incompleteTasksViewModel.completeTask(taskId)
+//            incompleteTasksViewModel.completeTask(taskId)
         }
         override fun onTaskUnfinished(taskId: Int)
         {
-            TODO("Not yet implemented")
+//            TODO("Not yet implemented")
         }
         override fun onTaskEdit(taskId: Int)
         {
@@ -56,7 +54,7 @@ class IncompleteTasksFragment : Fragment()
         }
         override fun onTaskDelete(taskId: Int)
         {
-            TODO("Not yet implemented")
+            incompleteTasksViewModel.deleteTask(taskId)
         }
     }
     private val taskListAdapter = TaskListAdapter(taskViewHolderListener)

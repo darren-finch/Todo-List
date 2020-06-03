@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <import type="com.darrenfinch.todolist.view.helpers.databinding.TimeUtil"/>
+        <import type="com.darrenfinch.todolist.view.helpers.DatabindingUtil"/>
         <variable
             name="task"
             type="com.darrenfinch.todolist.model.room.Task" />
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/standard_margin"
-                    android:text="@{TimeUtil.INSTANCE.dateStringFromLong(task.scheduledDate)}"
+                    android:text="@{DatabindingUtil.INSTANCE.dateStringFromLong(task.scheduledDate)}"
                     android:textAppearance="@style/H4LessDark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/viewMoreButton"
@@ -96,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/standard_margin"
-                    android:text="@string/time_to_complete_label"
+                    android:text="@string/time_to_complete"
                     android:textAppearance="@style/H4LessDark"
                     app:layout_constraintEnd_toStartOf="@+id/estimatedTTC"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -107,7 +107,7 @@
                     android:id="@+id/estimatedTTC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{TimeUtil.INSTANCE.putTogetherTimeAndUnit(task.estimatedTTC, task.estimatedTTCUnit)}"
+                    android:text="@{DatabindingUtil.INSTANCE.putTogetherTimeAndUnit(task.estimatedTTC, task.estimatedTTCUnit)}"
                     app:layout_constraintBottom_toBottomOf="@+id/textView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView"
@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/standard_margin"
-                    android:text="@string/task_description_header"
+                    android:text="@string/task_description"
                     android:textAppearance="@style/H4LessDark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />

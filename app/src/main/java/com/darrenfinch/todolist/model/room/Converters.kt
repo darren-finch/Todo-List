@@ -9,5 +9,17 @@ class Converters
     fun timeUnitToString(value: TimeUnit) = value.toString()
 
     @TypeConverter
-    fun stringToTimeUnit(value: String) = enumValueOf<TimeUnit>(value)
+    fun stringToTimeUnit(value: String) : TimeUnit
+    {
+        //If the enum schema changes, we'll just catch that exception here.
+        try
+        {
+            return TimeUnit.fromString(value)
+        }
+        catch (e: Exception)
+        {
+            e.printStackTrace()
+        }
+        return TimeUnit.defaultUnit
+    }
 }

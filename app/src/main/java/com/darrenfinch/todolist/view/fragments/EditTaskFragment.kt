@@ -1,15 +1,17 @@
 package com.darrenfinch.todolist.view.fragments
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.databinding.Observable
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 
 import com.darrenfinch.todolist.R
@@ -17,11 +19,10 @@ import com.darrenfinch.todolist.databinding.FragmentEditTaskBinding
 import com.darrenfinch.todolist.dependencyInjection.dagger2.AppModule
 import com.darrenfinch.todolist.dependencyInjection.dagger2.DaggerApplicationComponent
 import com.darrenfinch.todolist.dependencyInjection.dagger2.RoomModule
-import com.darrenfinch.todolist.dependencyInjection.dagger2.ViewModelFactoryModule
 import com.darrenfinch.todolist.model.TimeUnit
-import com.darrenfinch.todolist.model.room.Task
 import com.darrenfinch.todolist.viewmodel.EditTaskViewModel
 import com.darrenfinch.todolist.viewmodel.EditTaskViewModelFactory
+import java.util.*
 import javax.inject.Inject
 
 class EditTaskFragment : Fragment()
@@ -41,6 +42,9 @@ class EditTaskFragment : Fragment()
             materialToolbar.setOnMenuItemClickListener { onMenuItemClicked(it.itemId) }
             materialToolbar.inflateMenu(R.menu.edit_task_menu)
             materialToolbar.setNavigationOnClickListener { navigateUp() }
+
+            scheduledDate.setOnClickListener { openDatePickerDialog() }
+            timeToComplete.setOnClickListener { openEstimatedTTCPicker() }
         }
         setHasOptionsMenu(true)
 
@@ -56,24 +60,13 @@ class EditTaskFragment : Fragment()
     }
     private fun saveTask()
     {
-        val task = getTaskFromUI()
+        val task = editTaskViewModel.observableTask.get()
         if(insertingTask)
             editTaskViewModel.insertTask(task)
         else
             editTaskViewModel.updateTask(task)
 
         navigateUp()
-    }
-    private fun getTaskFromUI() : Task
-    {
-        //TODO: Don't forget to bind everything properly here.
-        return Task(
-            name = binding.taskNameEditText.text.toString(),
-            estimatedTTC = 1,
-            estimatedTTCUnit = TimeUnit.HRS,
-            scheduledDate = System.currentTimeMillis(),
-            description = binding.taskDescriptionEditText.text.toString()
-        )
     }
     private fun navigateUp()
     {
@@ -87,8 +80,9 @@ class EditTaskFragment : Fragment()
             insertingTask = true
 
         setupDependencies()
+        setupViewModel()
 
-        if(!insertingTask)
+        if(!insertingTask && !editTaskViewModel.observableTask.dirty)
             observeViewModel()
     }
     private fun setupDependencies()
@@ -106,14 +100,48 @@ class EditTaskFragment : Fragment()
             )
             .build()
             .inject(this)
-
+    }
+    private fun setupViewModel()
+    {
         editTaskViewModel = ViewModelProvider(viewModelStore, editTaskViewModelFactory).get(EditTaskViewModel::class.java)
         binding.viewModel = editTaskViewModel
     }
     private fun observeViewModel()
     {
-        editTaskViewModel.getTask(args.taskId).observe(viewLifecycleOwner, Observer {
+        editTaskViewModel.getTaskFromRepository(args.taskId).observe(viewLifecycleOwner, Observer {
             editTaskViewModel.observableTask.set(it)
         })
+    }
+
+    private fun openDatePickerDialog()
+    {
+        val calendarForScheduledDate = Calendar.getInstance()
+        calendarForScheduledDate.timeInMillis = editTaskViewModel.observableTask.scheduledDate
+        context?.let{
+                DatePickerDialog(it, DatePickerDialog.OnDateSetListener
+                { _, year, month, dayOfMonth ->
+                    updateTaskScheduledDate(year, month, dayOfMonth)
+                }, calendarForScheduledDate[Calendar.YEAR], calendarForScheduledDate[Calendar.MONTH], calendarForScheduledDate[Calendar.DAY_OF_MONTH])
+            }?.show()
+    }
+    private fun updateTaskScheduledDate(year: Int, month: Int, dayOfMonth: Int)
+    {
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, dayOfMonth)
+        editTaskViewModel.observableTask.scheduledDate = calendar.timeInMillis
+    }
+
+    private fun openEstimatedTTCPicker()
+    {
+        val dialog = PickTimeToCompleteDialog.newInstance(editTaskViewModel.observableTask.estimatedTTC, editTaskViewModel.observableTask.estimatedTTCUnit)
+        dialog.setListener(object : PickTimeToCompleteDialog.Listener
+        {
+            override fun onTimeToCompleteSelected(estimatedTTC: Int, estimatedTTCUnit: TimeUnit)
+            {
+                editTaskViewModel.observableTask.estimatedTTC = estimatedTTC
+                editTaskViewModel.observableTask.estimatedTTCUnit = estimatedTTCUnit
+            }
+        })
+        dialog.show(parentFragmentManager, "PickTimeToCompleteDialog")
     }
 }

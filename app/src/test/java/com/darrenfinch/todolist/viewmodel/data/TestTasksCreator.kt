@@ -2,7 +2,7 @@ package com.darrenfinch.todolist.viewmodel.data
 
 import com.darrenfinch.todolist.model.TimeUnit
 import com.darrenfinch.todolist.model.room.Task
-import com.darrenfinch.todolist.view.helpers.ExampleTasksCreator
+import java.util.*
 
 object TestTasksCreator
 {
@@ -11,9 +11,9 @@ object TestTasksCreator
         return Task(
             1,
             "Task 1",
-            ExampleTasksCreator.getCurrentTime(),
+            getCurrentTime(),
             1,
-            TimeUnit.HRS,
+            TimeUnit.HR,
             "Task 1 Description"
         )
     }
@@ -22,43 +22,49 @@ object TestTasksCreator
             Task(
                 1,
                 "Task 1",
-                ExampleTasksCreator.getCurrentTime(),
+                getCurrentTime(),
                 1,
-                TimeUnit.HRS,
+                TimeUnit.HR,
                 "Task 1 Description"
             ),
             Task(
                 2,
                 "Task 2",
-                ExampleTasksCreator.getCurrentTime(),
+                getCurrentTime(),
                 2,
-                TimeUnit.HRS,
+                TimeUnit.HR,
                 "Task 2 Description"
             ),
             Task(
                 3,
                 "Task 3",
-                ExampleTasksCreator.getCurrentTime(),
+                getCurrentTime(),
                 3,
-                TimeUnit.HRS,
+                TimeUnit.HR,
                 "Task 3 Description"
             ),
             Task(
                 4,
                 "Task 4",
-                ExampleTasksCreator.getCurrentTime(),
+                getCurrentTime(),
                 4,
-                TimeUnit.HRS,
+                TimeUnit.HR,
                 "Task 4 Description"
             ),
             Task(
                 5,
                 "Task 5",
-                ExampleTasksCreator.getCurrentTime(),
+                getCurrentTime(),
                 5,
-                TimeUnit.HRS,
+                TimeUnit.HR,
                 "Task 5 Description"
             )
         )
     }
+    private fun getCurrentTime() = GregorianCalendar.getInstance().apply {
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
+        set(Calendar.MILLISECOND, 0)
+    }.timeInMillis
 }

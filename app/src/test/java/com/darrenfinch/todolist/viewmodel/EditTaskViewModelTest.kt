@@ -44,7 +44,7 @@ class EditTaskViewModelTest
     {
         val taskIdCapturingSlot = CapturingSlot<Int>()
         every { repository.getTask(capture(taskIdCapturingSlot)) } returns MutableLiveData()
-        SUT.getTask(TASK_ID)
+        SUT.getTaskFromRepository(TASK_ID)
         assertThat(taskIdCapturingSlot.captured, `is`(TASK_ID))
     }
 
@@ -53,7 +53,7 @@ class EditTaskViewModelTest
     {
         stubTestTaskLiveDataToReturnTestTask()
         every { repository.getTask(any()) } returns testTaskLiveData
-        assertThat(SUT.getTask(TASK_ID).value, `is`(testTask))
+        assertThat(SUT.getTaskFromRepository(TASK_ID).value, `is`(testTask))
     }
 
     @Test
