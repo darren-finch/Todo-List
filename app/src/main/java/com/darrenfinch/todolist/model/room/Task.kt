@@ -8,7 +8,7 @@ import com.darrenfinch.todolist.model.TimeUnit
 @Entity(tableName = "tasks")
 data class Task(@PrimaryKey(autoGenerate = true)
                 @ColumnInfo(name = "taskId")
-                val id: Int,
+                val id: Int = 0,
                 val name: String,
                 val scheduledDate: Long,
                 val estimatedTTC: Int,

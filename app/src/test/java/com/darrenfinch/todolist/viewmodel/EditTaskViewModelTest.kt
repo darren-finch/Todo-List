@@ -1,5 +1,6 @@
 package com.darrenfinch.todolist.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.darrenfinch.todolist.model.TaskRepository
@@ -24,6 +25,7 @@ class EditTaskViewModelTest
     private val testTaskLiveData = mockk<LiveData<Task>>()
 
     private val repository = mockk<TaskRepository>(relaxUnitFun = true)
+    private val application = mockk<Application>(relaxUnitFun = true)
     //endregion Helper Fields ----------------------------------------------------------------------
 
     private lateinit var SUT: EditTaskViewModel
@@ -32,7 +34,7 @@ class EditTaskViewModelTest
     @Before
     fun setup()
     {
-        SUT = EditTaskViewModel(repository)
+        SUT = EditTaskViewModel(repository, application)
     }
     //endregion Set up / Tear down
 

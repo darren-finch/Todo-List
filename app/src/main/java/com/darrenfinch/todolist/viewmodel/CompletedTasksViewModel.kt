@@ -5,9 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.darrenfinch.todolist.model.TaskRepository
 import javax.inject.Inject
 
-class CompletedTasksViewModel
-@Inject
-constructor(private val repository: TaskRepository, application: Application) : AndroidViewModel(application)
+class CompletedTasksViewModel(private val repository: TaskRepository, application: Application) : AndroidViewModel(application)
 {
 
 }

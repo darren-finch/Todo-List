@@ -21,19 +21,15 @@ class CompletedTasksFragment : Fragment()
     {
         override fun onTaskFinished(taskId: Int)
         {
-            TODO("Not yet implemented")
         }
         override fun onTaskUnfinished(taskId: Int)
         {
-            TODO("Not yet implemented")
         }
         override fun onTaskEdit(taskId: Int)
         {
-            TODO("Not yet implemented")
         }
         override fun onTaskDelete(taskId: Int)
         {
-            TODO("Not yet implemented")
         }
     }
 

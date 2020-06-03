@@ -5,9 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.darrenfinch.todolist.view.helpers.databinding.TimeUtil"/>
         <variable
-            name="task"
-            type="com.darrenfinch.todolist.model.room.Task" />
+            name="viewModel"
+            type="com.darrenfinch.todolist.viewmodel.EditTaskViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +36,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+            android:id="@+id/taskNameTextInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/standard_margin"
@@ -48,7 +49,25 @@
                 android:id="@+id/taskNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@{task.name}"/>
+                android:text="@{viewModel.observableTask.name}"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/taskDescriptionTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/standard_margin"
+            android:hint="@string/task_description_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/taskNameTextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/taskDescriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@{viewModel.observableTask.description}"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,7 +80,7 @@
             android:layout_marginTop="@dimen/standard_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/taskDescriptionTextInputLayout">
 
             <TextView
                 android:id="@+id/scheduledDateLabel"
@@ -79,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/standard_margin"
                 android:layout_marginEnd="@dimen/standard_margin"
-                android:text=""
+                android:text="@{TimeUtil.INSTANCE.dateStringFromLong(viewModel.observableTask.scheduledDate)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="5/21/20" />
@@ -100,29 +119,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/standard_margin"
                 android:layout_marginEnd="@dimen/standard_margin"
+                android:text="@{TimeUtil.INSTANCE.putTogetherTimeAndUnit(viewModel.observableTask.estimatedTTC, viewModel.observableTask.estimatedTTCUnit)}"
                 app:layout_constraintBottom_toBottomOf="@+id/timeToCompleteLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/timeToCompleteLabel"
                 tools:text="1 hr" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/standard_margin"
-            android:hint="@string/task_description_hint"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/taskDescriptionEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@{task.description}"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

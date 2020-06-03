@@ -30,7 +30,7 @@ class TaskViewHolder(val listener: TaskViewHolder.Listener, private val expandCo
         if(taskIsComplete)
             setTaskDisabledStyle()
 
-        binding.taskCompletedCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.taskCompletedCheckBox.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) listener.onTaskFinished(taskId) else listener.onTaskUnfinished(taskId)
         }
     }

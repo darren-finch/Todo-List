@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -15,13 +16,14 @@ import com.darrenfinch.todolist.databinding.FragmentIncompleteTasksBinding
 import com.darrenfinch.todolist.dependencyInjection.dagger2.AppModule
 import com.darrenfinch.todolist.dependencyInjection.dagger2.DaggerApplicationComponent
 import com.darrenfinch.todolist.dependencyInjection.dagger2.RoomModule
-import com.darrenfinch.todolist.dependencyInjection.dagger2.ViewModelModule
+import com.darrenfinch.todolist.dependencyInjection.dagger2.ViewModelFactoryModule
 import com.darrenfinch.todolist.model.room.Task
 import com.darrenfinch.todolist.view.adapters.TaskListAdapter
 import com.darrenfinch.todolist.view.adapters.TaskViewHolder
 import com.darrenfinch.todolist.view.helpers.MarginItemDecoration
 import com.darrenfinch.todolist.view.helpers.ToastHelper
 import com.darrenfinch.todolist.viewmodel.IncompleteTasksViewModel
+import com.darrenfinch.todolist.viewmodel.IncompleteTasksViewModelFactory
 import javax.inject.Inject
 
 const val DEFAULT_EDIT_FRAGMENT_TASK_ID = -1
@@ -29,7 +31,8 @@ const val DEFAULT_EDIT_FRAGMENT_TASK_ID = -1
 class IncompleteTasksFragment : Fragment()
 {
     @Inject
-    lateinit var incompleteTasksViewModel: IncompleteTasksViewModel
+    lateinit var incompleteTasksViewModelFactory: IncompleteTasksViewModelFactory
+    private lateinit var incompleteTasksViewModel: IncompleteTasksViewModel
     @Inject
     lateinit var toastHelper: ToastHelper
 
@@ -89,7 +92,7 @@ class IncompleteTasksFragment : Fragment()
     {
         super.onActivityCreated(savedInstanceState)
         setupDependencies()
-        observeTasks()
+        observeViewModel()
     }
     //DON'T USE ANY FIELDS WITH @INJECT BEFORE THIS METHOD IS CALLED.
     private fun setupDependencies()
@@ -105,15 +108,12 @@ class IncompleteTasksFragment : Fragment()
                     requireActivity().application
                 )
             )
-            .viewModelModule(
-                ViewModelModule(
-                    viewModelStore
-                )
-            )
             .build()
             .inject(this)
+
+        incompleteTasksViewModel = ViewModelProvider(viewModelStore, incompleteTasksViewModelFactory).get(IncompleteTasksViewModel::class.java)
     }
-    private fun observeTasks()
+    private fun observeViewModel()
     {
         incompleteTasksViewModel.getTasks().observe(viewLifecycleOwner, tasksListObserver)
     }
