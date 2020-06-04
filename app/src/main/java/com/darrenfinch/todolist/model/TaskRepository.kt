@@ -10,37 +10,36 @@ class TaskRepository
 @Inject
 constructor(
     private val ioScope: CoroutineScope,
-    private val taskDao: TaskDao)
-{
+    private val taskDao: TaskDao
+) {
     fun getCompletedTasks() = taskDao.getCompletedTasks()
     fun getIncompleteTasks() = taskDao.getIncompleteTasks()
     fun getTask(taskId: Int) = taskDao.getTask(taskId)
-    fun insertTask(task: Task)
-    {
+    fun insertTask(task: Task) {
         ioScope.launch {
             taskDao.insertTask(task)
         }
     }
-    fun updateTask(task: Task)
-    {
+
+    fun updateTask(task: Task) {
         ioScope.launch {
             taskDao.updateTask(task)
         }
     }
-    fun deleteTask(taskId: Int)
-    {
+
+    fun deleteTask(taskId: Int) {
         ioScope.launch {
             taskDao.deleteTask(taskId)
         }
     }
-    fun completeTask(taskId: Int, dateOfCompletion: Long)
-    {
+
+    fun completeTask(taskId: Int, dateOfCompletion: Long) {
         ioScope.launch {
             taskDao.completeTask(taskId, dateOfCompletion)
         }
     }
-    fun uncompleteTask(taskId: Int)
-    {
+
+    fun uncompleteTask(taskId: Int) {
         ioScope.launch {
             taskDao.uncompleteTask(taskId)
         }

@@ -4,16 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface TaskDao
-{
+interface TaskDao {
     @Query("SELECT * FROM tasks WHERE isComplete = 1 ORDER BY scheduledDate DESC")
-    fun getCompletedTasks() : LiveData<List<Task>>
+    fun getCompletedTasks(): LiveData<List<Task>>
 
     @Query("SELECT * FROM tasks WHERE isComplete = 0 ORDER BY scheduledDate DESC")
-    fun getIncompleteTasks() : LiveData<List<Task>>
+    fun getIncompleteTasks(): LiveData<List<Task>>
 
     @Query("SELECT * FROM tasks WHERE taskId = :taskId")
-    fun getTask(taskId: Int) : LiveData<Task>
+    fun getTask(taskId: Int): LiveData<Task>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTask(task: Task)

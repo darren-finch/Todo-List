@@ -7,8 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
 @Module
-class CoroutineModule
-{
+class CoroutineModule {
     @Provides
     @Singleton
     fun provideIOScope() = CoroutineScope(Dispatchers.IO)

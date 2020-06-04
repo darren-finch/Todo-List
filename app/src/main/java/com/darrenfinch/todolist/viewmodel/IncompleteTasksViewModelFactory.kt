@@ -6,7 +6,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.darrenfinch.todolist.model.TaskRepository
 
 @Suppress("UNCHECKED_CAST")
-class IncompleteTasksViewModelFactory(private val repository: TaskRepository, private val application: Application) : ViewModelProvider.AndroidViewModelFactory(application)
-{
-    override fun <T : ViewModel?> create(modelClass: Class<T>) = IncompleteTasksViewModel(repository, application) as T
+class IncompleteTasksViewModelFactory(
+    private val repository: TaskRepository,
+    private val application: Application
+) : ViewModelProvider.AndroidViewModelFactory(application) {
+    override fun <T : ViewModel?> create(modelClass: Class<T>) =
+        IncompleteTasksViewModel(repository, application) as T
 }

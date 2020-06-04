@@ -5,20 +5,21 @@ import com.darrenfinch.todolist.model.TaskRepository
 import com.darrenfinch.todolist.view.fragments.CompletedTasksFragment
 import com.darrenfinch.todolist.view.fragments.EditTaskFragment
 import com.darrenfinch.todolist.view.fragments.IncompleteTasksFragment
-import com.darrenfinch.todolist.viewmodel.*
+import com.darrenfinch.todolist.viewmodel.CompletedTasksViewModelFactory
+import com.darrenfinch.todolist.viewmodel.EditTaskViewModelFactory
+import com.darrenfinch.todolist.viewmodel.IncompleteTasksViewModelFactory
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [AppModule::class, RoomModule::class, ViewModelFactoryModule::class, CoroutineModule::class])
-interface ApplicationComponent
-{
-    fun inject(repository: TaskRepository) : TaskRepository
+interface ApplicationComponent {
+    fun inject(repository: TaskRepository): TaskRepository
     fun inject(viewModelFactory: IncompleteTasksViewModelFactory)
     fun inject(viewModelFactory: CompletedTasksViewModelFactory)
     fun inject(viewModelFactory: EditTaskViewModelFactory)
     fun inject(fragment: IncompleteTasksFragment)
     fun inject(fragment: CompletedTasksFragment)
     fun inject(fragment: EditTaskFragment)
-    fun application() : Application
+    fun application(): Application
 }

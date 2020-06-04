@@ -11,9 +11,12 @@ import kotlinx.coroutines.CoroutineScope
 import javax.inject.Singleton
 
 @Module
-class RoomModule(application: Application)
-{
-    private val taskDatabase = Room.databaseBuilder(application.applicationContext, TaskDatabase::class.java, "TaskDatabase")
+class RoomModule(application: Application) {
+    private val taskDatabase = Room.databaseBuilder(
+        application.applicationContext,
+        TaskDatabase::class.java,
+        "TaskDatabase"
+    )
         .fallbackToDestructiveMigration() //TODO: REMOVE IN PRODUCTION
         .build()
 
@@ -27,5 +30,6 @@ class RoomModule(application: Application)
 
     @Singleton
     @Provides
-    fun provideRepository(ioScope: CoroutineScope, taskDao: TaskDao) = TaskRepository(ioScope = ioScope, taskDao = taskDao)
+    fun provideRepository(ioScope: CoroutineScope, taskDao: TaskDao) =
+        TaskRepository(ioScope = ioScope, taskDao = taskDao)
 }

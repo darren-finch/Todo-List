@@ -2,21 +2,16 @@ package com.darrenfinch.todolist.model.room
 
 import androidx.room.TypeConverter
 
-class Converters
-{
+class Converters {
     @TypeConverter
     fun timeUnitToString(value: TimeUnit) = value.toString()
 
     @TypeConverter
-    fun stringToTimeUnit(value: String) : TimeUnit
-    {
+    fun stringToTimeUnit(value: String): TimeUnit {
         //If the enum schema changes, we'll just catch that exception here.
-        try
-        {
+        try {
             return TimeUnit.fromString(value)
-        }
-        catch (e: Exception)
-        {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         return TimeUnit.defaultUnit

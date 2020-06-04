@@ -7,20 +7,19 @@ import com.darrenfinch.todolist.model.TaskRepository
 import com.darrenfinch.todolist.model.room.Task
 import com.darrenfinch.todolist.view.helpers.ObservableTask
 
-class EditTaskViewModel(private val repository: TaskRepository, application: Application) : AndroidViewModel(application)
-{
+class EditTaskViewModel(private val repository: TaskRepository, application: Application) :
+    AndroidViewModel(application) {
     val observableTask = ObservableTask()
 
-    fun getTaskFromRepository(taskId: Int) : LiveData<Task>
-    {
+    fun getTaskFromRepository(taskId: Int): LiveData<Task> {
         return repository.getTask(taskId)
     }
-    fun insertTask(task: Task)
-    {
+
+    fun insertTask(task: Task) {
         repository.insertTask(task)
     }
-    fun updateTask(task: Task)
-    {
+
+    fun updateTask(task: Task) {
         repository.updateTask(task)
     }
 }

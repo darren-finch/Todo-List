@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Transformation
 
-object ExpandCollapseViewAnimator
-{
-    fun expand(viewBeingAnimated: View)
-    {
+object ExpandCollapseViewAnimator {
+    fun expand(viewBeingAnimated: View) {
         //Measure full height of the view. In our case, it's the taskDescription text view on our CardView.
-        viewBeingAnimated.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        viewBeingAnimated.measure(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
 
         //This is the final height that the expand animation is aiming for.
         val targetHeight: Int = viewBeingAnimated.measuredHeight
@@ -19,17 +20,16 @@ object ExpandCollapseViewAnimator
         viewBeingAnimated.layoutParams.height = 1
         viewBeingAnimated.visibility = View.VISIBLE
 
-        val expandAnimation: Animation = object : Animation()
-        {
+        val expandAnimation: Animation = object : Animation() {
             //Called on every frame of the animation
-            override fun applyTransformation(interpolatedTime: Float, t: Transformation?)
-            {
+            override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
                 //Grow the view's height over time. And if the animation is over, make sure the view is at full height.
                 viewBeingAnimated.layoutParams.height =
                     if (interpolatedTime == 1f) ViewGroup.LayoutParams.WRAP_CONTENT else (targetHeight * interpolatedTime).toInt()
                 //Redraw layout
                 viewBeingAnimated.requestLayout()
             }
+
             //This tells Android that this animation will change the boundaries of its view.
             override fun willChangeBounds() = true
         }
@@ -39,21 +39,18 @@ object ExpandCollapseViewAnimator
         expandAnimation.duration = (targetHeight / getViewDensity(viewBeingAnimated)).toLong()
         viewBeingAnimated.startAnimation(expandAnimation)
     }
-    fun collapse(viewBeingAnimated: View)
-    {
+
+    fun collapse(viewBeingAnimated: View) {
         //The initial height is the starting point for our animation.
         val initialHeight: Int = viewBeingAnimated.measuredHeight
 
-        val collapseAnimation: Animation = object : Animation()
-        {
+        val collapseAnimation: Animation = object : Animation() {
             //Called on every frame of the animation
-            override fun applyTransformation(interpolatedTime: Float, t: Transformation?)
-            {
+            override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
                 //If the animation is over, this cleans up the view from the layout completely
                 if (interpolatedTime == 1f)
                     viewBeingAnimated.visibility = View.GONE
-                else
-                {
+                else {
                     //Shrink the view's height over time.
                     viewBeingAnimated.layoutParams.height =
                         initialHeight - (initialHeight * interpolatedTime).toInt()
@@ -62,6 +59,7 @@ object ExpandCollapseViewAnimator
                     viewBeingAnimated.requestLayout()
                 }
             }
+
             //This animation will change the boundaries of its view.
             override fun willChangeBounds() = true
         }
