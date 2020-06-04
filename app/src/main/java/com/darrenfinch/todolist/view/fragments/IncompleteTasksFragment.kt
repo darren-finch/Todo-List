@@ -41,7 +41,7 @@ class IncompleteTasksFragment : Fragment()
     {
         override fun onTaskFinished(taskId: Int)
         {
-            incompleteTasksViewModel.completeTask(taskId)
+            incompleteTasksViewModel.completeTask(taskId, System.currentTimeMillis())
             Toast.makeText(context, getString(R.string.marked_task_as_complete), Toast.LENGTH_SHORT).show()
         }
         override fun onTaskUnfinished(taskId: Int) { }

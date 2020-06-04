@@ -7,41 +7,42 @@ import androidx.recyclerview.widget.RecyclerView
 import com.darrenfinch.todolist.R
 import com.darrenfinch.todolist.databinding.TaskItemBinding
 import com.darrenfinch.todolist.model.room.Task
+import com.darrenfinch.todolist.view.helpers.DatabindingUtil
 import com.darrenfinch.todolist.view.helpers.ExpandCollapseViewAnimator
 
-class TaskViewHolder(val listener: TaskViewHolder.Listener, itemView: View) : RecyclerView.ViewHolder(itemView)
+class TaskViewHolder(val listener: Listener, itemView: View) : RecyclerView.ViewHolder(itemView)
 {
     private var binding = TaskItemBinding.bind(itemView)
     private var isExpanded = false
-    private var taskIsComplete = false
-    private var taskId = 0
+    private lateinit var task: Task
 
     fun bind(task: Task)
     {
+        this.task = task
         binding.task = task
         binding.viewHolder = this
-        setupUI(task)
+        setupUI()
     }
-    private fun setupUI(task: Task)
+    private fun setupUI()
     {
-        taskId = task.id
-        taskIsComplete = task.isComplete
-
-        if(taskIsComplete)
-            setTaskDisabledStyle()
+        if(task.isComplete)
+            setTaskCompletedStyle()
 
         binding.taskCompletedCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked) listener.onTaskFinished(taskId) else listener.onTaskUnfinished(taskId)
+            if(isChecked) listener.onTaskFinished(task.id) else listener.onTaskUnfinished(task.id)
         }
     }
-    private fun setTaskDisabledStyle()
+    private fun setTaskCompletedStyle()
     {
         binding.taskNameTextView.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
     }
 
+    fun getTimeToCompleteWithUnit() = DatabindingUtil.putTogetherTimeAndUnit(task.estimatedTTC, task.estimatedTTCUnit)
+    fun getScheduledDateAsString() = DatabindingUtil.dateStringFromLong(task.scheduledDate)
+    fun getDateOfCompletionAsString() = DatabindingUtil.dateStringFromLong(task.dateOfCompletion)
     fun inverseExpandedWithAnimation()
     {
-        if (!taskIsComplete)
+        if (!task.isComplete)
         {
             if (isExpanded)
                 ExpandCollapseViewAnimator.collapse(binding.taskDetails)
@@ -65,8 +66,8 @@ class TaskViewHolder(val listener: TaskViewHolder.Listener, itemView: View) : Re
     {
         when(itemId)
         {
-            R.id.editTaskMenuItem -> listener.onTaskEdit(taskId)
-            R.id.deleteTaskMenuItem -> listener.onTaskDelete(taskId)
+            R.id.editTaskMenuItem -> listener.onTaskEdit(task.id)
+            R.id.deleteTaskMenuItem -> listener.onTaskDelete(task.id)
         }
     }
 

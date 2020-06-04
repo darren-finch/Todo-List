@@ -3,6 +3,7 @@ package com.darrenfinch.todolist.viewmodel
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.darrenfinch.todolist.TASK_ID
 import com.darrenfinch.todolist.model.TaskRepository
 import com.darrenfinch.todolist.model.room.Task
 import com.darrenfinch.todolist.viewmodel.data.TestTasksCreator
@@ -13,10 +14,6 @@ import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 
 import io.mockk.*
-
-//region Constants -----------------------------------------------------------------------------
-private const val TASK_ID = 1
-//endregion Constants --------------------------------------------------------------------------
 
 class EditTaskViewModelTest
 {
@@ -60,8 +57,8 @@ class EditTaskViewModelTest
     fun `insertTask() passes task to repository`()
     {
         val taskCapturingSlot = CapturingSlot<Task>()
-        every { repository.insertTask(capture(taskCapturingSlot)) } answers { }
         SUT.insertTask(testTask)
+        verify { repository.insertTask(capture(taskCapturingSlot)) }
         assertThat(taskCapturingSlot.captured, `is`(testTask))
     }
 
@@ -69,8 +66,8 @@ class EditTaskViewModelTest
     fun `updateTask() passes task to repository`()
     {
         val taskCapturingSlot = CapturingSlot<Task>()
-        every { repository.updateTask(capture(taskCapturingSlot)) } answers { }
         SUT.updateTask(testTask)
+        verify { repository.updateTask(capture(taskCapturingSlot)) }
         assertThat(taskCapturingSlot.captured, `is`(testTask))
     }
     //endregion Tests ------------------------------------------------------------------------------

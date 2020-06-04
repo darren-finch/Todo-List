@@ -10,6 +10,7 @@ data class Task(@PrimaryKey(autoGenerate = true)
                 val id: Int = 0,
                 val name: String,
                 val scheduledDate: Long,
+                val dateOfCompletion: Long,
                 val estimatedTTC: Int,
                 val estimatedTTCUnit: TimeUnit,
                 val description: String,

@@ -49,6 +49,12 @@ class ObservableTask : BaseObservable()
             notifyPropertyChanged(BR.scheduledDate)
         }
     @get:Bindable
+    var dateOfCompletion: Long = 0
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.dateOfCompletion)
+        }
+    @get:Bindable
     var description: String = ""
         set(value) {
             field = value
@@ -62,6 +68,7 @@ class ObservableTask : BaseObservable()
         estimatedTTC = task.estimatedTTC
         estimatedTTCUnit = task.estimatedTTCUnit
         scheduledDate = task.scheduledDate
+        dateOfCompletion = task.dateOfCompletion
         description = task.description
     }
     fun get() : Task
@@ -72,6 +79,7 @@ class ObservableTask : BaseObservable()
             estimatedTTC = estimatedTTC,
             estimatedTTCUnit = estimatedTTCUnit,
             scheduledDate = scheduledDate,
+            dateOfCompletion = dateOfCompletion,
             description = description
         )
     }

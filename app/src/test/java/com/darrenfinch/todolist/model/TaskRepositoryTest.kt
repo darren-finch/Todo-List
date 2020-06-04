@@ -3,6 +3,8 @@ package com.darrenfinch.todolist.model
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.darrenfinch.todolist.CURRENT_FAKE_TIME
+import com.darrenfinch.todolist.TASK_ID
 import com.darrenfinch.todolist.model.room.Task
 import com.darrenfinch.todolist.model.room.TaskDao
 import com.darrenfinch.todolist.viewmodel.data.TestTasksCreator
@@ -17,10 +19,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Rule
-
-//region Constants -----------------------------------------------------------------------------
-private const val TASK_ID = 1
-//endregion Constants --------------------------------------------------------------------------
 
 @ExperimentalCoroutinesApi
 class TaskRepositoryTest
@@ -133,13 +131,17 @@ class TaskRepositoryTest
     }
 
     @Test
-    fun `completeTask() invokes DAO completeTask() and passes taskId`()
+    fun `completeTask() invokes DAO completeTask() and passes taskId and current time`()
     {
         val taskIdCapturingSlot = CapturingSlot<Int>()
-        SUT.completeTask(TASK_ID)
-        coVerify { taskDao.completeTask(capture(taskIdCapturingSlot)) }
+        val dateOfCompletionCapturingSlot = CapturingSlot<Long>()
+
+        SUT.completeTask(TASK_ID, CURRENT_FAKE_TIME)
+
+        coVerify { taskDao.completeTask(capture(taskIdCapturingSlot), capture(dateOfCompletionCapturingSlot)) }
         confirmVerified(taskDao)
         assertThat(taskIdCapturingSlot.captured, `is`(TASK_ID))
+        assertThat(dateOfCompletionCapturingSlot.captured, `is`(CURRENT_FAKE_TIME))
     }
 
     @Test

@@ -2,6 +2,8 @@ package com.darrenfinch.todolist.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.darrenfinch.todolist.CURRENT_FAKE_TIME
+import com.darrenfinch.todolist.TASK_ID
 import com.darrenfinch.todolist.model.TaskRepository
 import com.darrenfinch.todolist.model.room.Task
 import com.darrenfinch.todolist.viewmodel.data.TestTasksCreator
@@ -10,10 +12,6 @@ import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
-
-//region Constants -----------------------------------------------------------------------------
-private const val TASK_ID = 0
-//endregion Constants --------------------------------------------------------------------------
 
 class IncompleteTasksViewModelTest
 {
@@ -43,7 +41,6 @@ class IncompleteTasksViewModelTest
         stubRepositoryGetIncompleteTasksToReturnEmptyLiveData()
         SUT.getTasks()
         verify { repository.getIncompleteTasks() }
-        confirmVerified(repository)
     }
 
     @Test
@@ -56,20 +53,23 @@ class IncompleteTasksViewModelTest
     }
 
     @Test
-    fun `completeTask() passes id to repository`()
+    fun `completeTask() passes id and current time to repository`()
     {
         val taskIdCapturingSlot = CapturingSlot<Int>()
-        every { repository.completeTask(capture(taskIdCapturingSlot)) } answers { }
-        SUT.completeTask(TASK_ID)
+        val dateOfCompletionCapturingSlot = CapturingSlot<Long>()
+
+        SUT.completeTask(TASK_ID, CURRENT_FAKE_TIME)
+        verify { repository.completeTask(capture(taskIdCapturingSlot), capture(dateOfCompletionCapturingSlot)) }
         assertThat(taskIdCapturingSlot.captured, `is`(TASK_ID))
+        assertThat(dateOfCompletionCapturingSlot.captured, `is`(CURRENT_FAKE_TIME))
     }
 
     @Test
     fun `deleteTask() passes id to repository`()
     {
         val taskIdCapturingSlot = CapturingSlot<Int>()
-        every { repository.deleteTask(capture(taskIdCapturingSlot)) } answers { }
         SUT.deleteTask(TASK_ID)
+        verify { repository.deleteTask(capture(taskIdCapturingSlot)) }
         assertThat(taskIdCapturingSlot.captured, `is`(TASK_ID))
     }
     //endregion Tests ------------------------------------------------------------------------------

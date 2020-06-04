@@ -33,10 +33,10 @@ constructor(
             taskDao.deleteTask(taskId)
         }
     }
-    fun completeTask(taskId: Int)
+    fun completeTask(taskId: Int, dateOfCompletion: Long)
     {
         ioScope.launch {
-            taskDao.completeTask(taskId)
+            taskDao.completeTask(taskId, dateOfCompletion)
         }
     }
     fun uncompleteTask(taskId: Int)

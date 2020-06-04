@@ -7,6 +7,6 @@ import com.darrenfinch.todolist.model.TaskRepository
 class IncompleteTasksViewModel(private val repository: TaskRepository, application: Application) : AndroidViewModel(application)
 {
     fun getTasks() = repository.getIncompleteTasks()
-    fun completeTask(taskId: Int) = repository.completeTask(taskId)
+    fun completeTask(taskId: Int, dateOfCompletion: Long) = repository.completeTask(taskId, dateOfCompletion)
     fun deleteTask(taskId: Int) = repository.deleteTask(taskId)
 }
