@@ -1,4 +1,4 @@
-package com.darrenfinch.todolist.dependencyInjection.dagger2
+package com.darrenfinch.todolist.dependencyinjection
 
 import android.app.Application
 import androidx.room.Room
@@ -7,6 +7,7 @@ import com.darrenfinch.todolist.model.room.TaskDao
 import com.darrenfinch.todolist.model.room.TaskDatabase
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineScope
 import javax.inject.Singleton
 
 @Module
@@ -26,5 +27,5 @@ class RoomModule(application: Application)
 
     @Singleton
     @Provides
-    fun provideRepository(dao: TaskDao) = TaskRepository(dao)
+    fun provideRepository(ioScope: CoroutineScope, taskDao: TaskDao) = TaskRepository(ioScope = ioScope, taskDao = taskDao)
 }

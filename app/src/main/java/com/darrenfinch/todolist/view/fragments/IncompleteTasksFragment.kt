@@ -14,19 +14,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.darrenfinch.todolist.R
 import com.darrenfinch.todolist.databinding.FragmentIncompleteTasksBinding
-import com.darrenfinch.todolist.dependencyInjection.dagger2.AppModule
-import com.darrenfinch.todolist.dependencyInjection.dagger2.DaggerApplicationComponent
-import com.darrenfinch.todolist.dependencyInjection.dagger2.RoomModule
-import com.darrenfinch.todolist.dependencyInjection.dagger2.ViewModelFactoryModule
+import com.darrenfinch.todolist.dependencyinjection.AppModule
+import com.darrenfinch.todolist.dependencyinjection.DaggerApplicationComponent
+import com.darrenfinch.todolist.dependencyinjection.RoomModule
 import com.darrenfinch.todolist.model.room.Task
 import com.darrenfinch.todolist.view.adapters.TaskListAdapter
 import com.darrenfinch.todolist.view.adapters.TaskViewHolder
 import com.darrenfinch.todolist.view.helpers.DEFAULT_EDIT_FRAGMENT_TASK_ID
 import com.darrenfinch.todolist.view.helpers.MarginItemDecoration
-import com.darrenfinch.todolist.view.helpers.ToastHelper
 import com.darrenfinch.todolist.viewmodel.IncompleteTasksViewModel
 import com.darrenfinch.todolist.viewmodel.IncompleteTasksViewModelFactory
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class IncompleteTasksFragment : Fragment()

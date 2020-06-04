@@ -18,7 +18,7 @@ private const val TASK_ID = 0
 class IncompleteTasksViewModelTest
 {
     //region Helper Fields -------------------------------------------------------------------------
-    private val TEST_TASKS = TestTasksCreator.getSampleIncompleteTasks()
+    private val TEST_TASKS = TestTasksCreator.getIncompleteTasks()
 
     private val testTasksLiveData = mockk<MutableLiveData<List<Task>>>()
     private val application = mockk<Application>()

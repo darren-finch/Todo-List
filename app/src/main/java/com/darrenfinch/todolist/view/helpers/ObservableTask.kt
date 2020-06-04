@@ -4,7 +4,7 @@ import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import com.darrenfinch.todolist.BR
-import com.darrenfinch.todolist.model.TimeUnit
+import com.darrenfinch.todolist.model.room.TimeUnit
 import com.darrenfinch.todolist.model.room.Task
 
 class ObservableTask : BaseObservable()

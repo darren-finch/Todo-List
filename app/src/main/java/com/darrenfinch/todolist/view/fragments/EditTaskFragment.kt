@@ -7,19 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.Observable
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 
 import com.darrenfinch.todolist.R
 import com.darrenfinch.todolist.databinding.FragmentEditTaskBinding
-import com.darrenfinch.todolist.dependencyInjection.dagger2.AppModule
-import com.darrenfinch.todolist.dependencyInjection.dagger2.DaggerApplicationComponent
-import com.darrenfinch.todolist.dependencyInjection.dagger2.RoomModule
-import com.darrenfinch.todolist.model.TimeUnit
+import com.darrenfinch.todolist.dependencyinjection.AppModule
+import com.darrenfinch.todolist.dependencyinjection.DaggerApplicationComponent
+import com.darrenfinch.todolist.dependencyinjection.RoomModule
+import com.darrenfinch.todolist.model.room.TimeUnit
 import com.darrenfinch.todolist.view.helpers.DEFAULT_EDIT_FRAGMENT_TASK_ID
 import com.darrenfinch.todolist.viewmodel.EditTaskViewModel
 import com.darrenfinch.todolist.viewmodel.EditTaskViewModelFactory

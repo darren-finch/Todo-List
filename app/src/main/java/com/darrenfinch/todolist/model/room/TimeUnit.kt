@@ -1,4 +1,4 @@
-package com.darrenfinch.todolist.model
+package com.darrenfinch.todolist.model.room
 
 import java.util.*
 
@@ -24,7 +24,9 @@ enum class TimeUnit
         )
         fun fromString(value: String) : TimeUnit
         {
-            return stringToTimeUnitValues[formatString(value)] ?: defaultUnit
+            return stringToTimeUnitValues[formatString(
+                value
+            )] ?: defaultUnit
         }
         private fun formatString(value: String) = value.toLowerCase(Locale.ROOT).removeSuffix("s")
     }

@@ -1,12 +1,12 @@
 package com.darrenfinch.todolist.viewmodel.data
 
-import com.darrenfinch.todolist.model.TimeUnit
+import com.darrenfinch.todolist.model.room.TimeUnit
 import com.darrenfinch.todolist.model.room.Task
 import java.util.*
 
 object TestTasksCreator
 {
-    fun getSampleTask() : Task
+    fun getTask() : Task
     {
         return Task(
             1,
@@ -17,7 +17,7 @@ object TestTasksCreator
             "Task 1 Description"
         )
     }
-    fun getSampleIncompleteTasks() : List<Task> {
+    fun getIncompleteTasks() : List<Task> {
         return listOf(
             Task(
                 1,
@@ -61,7 +61,7 @@ object TestTasksCreator
             )
         )
     }
-    fun getSampleCompletedTasks() : List<Task> {
+    fun getCompletedTasks() : List<Task> {
         return listOf(
             Task(
                 1,

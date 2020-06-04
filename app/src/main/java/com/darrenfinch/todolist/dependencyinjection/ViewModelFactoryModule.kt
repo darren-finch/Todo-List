@@ -1,8 +1,6 @@
-package com.darrenfinch.todolist.dependencyInjection.dagger2
+package com.darrenfinch.todolist.dependencyinjection
 
 import android.app.Application
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStore
 import com.darrenfinch.todolist.model.TaskRepository
 import com.darrenfinch.todolist.viewmodel.*
 import dagger.Module

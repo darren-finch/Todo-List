@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.darrenfinch.todolist.R
 import com.darrenfinch.todolist.databinding.FragmentPickTimeToCompleteBinding
-import com.darrenfinch.todolist.model.TimeUnit
+import com.darrenfinch.todolist.model.room.TimeUnit
 
 class PickTimeToCompleteDialog: DialogFragment()
 {

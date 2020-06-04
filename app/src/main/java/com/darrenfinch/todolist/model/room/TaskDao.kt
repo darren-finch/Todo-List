@@ -6,10 +6,10 @@ import androidx.room.*
 @Dao
 interface TaskDao
 {
-    @Query("SELECT * FROM tasks WHERE isComplete = 1")
+    @Query("SELECT * FROM tasks WHERE isComplete = 1 ORDER BY scheduledDate DESC")
     fun getCompletedTasks() : LiveData<List<Task>>
 
-    @Query("SELECT * FROM tasks WHERE isComplete = 0")
+    @Query("SELECT * FROM tasks WHERE isComplete = 0 ORDER BY scheduledDate DESC")
     fun getIncompleteTasks() : LiveData<List<Task>>
 
     @Query("SELECT * FROM tasks WHERE taskId = :taskId")

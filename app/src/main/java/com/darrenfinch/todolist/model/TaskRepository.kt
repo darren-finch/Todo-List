@@ -1,47 +1,47 @@
 package com.darrenfinch.todolist.model
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.darrenfinch.todolist.model.room.Task
 import com.darrenfinch.todolist.model.room.TaskDao
-import com.darrenfinch.todolist.view.helpers.ExampleTasksCreator
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TaskRepository
 @Inject
-constructor(private val taskDao: TaskDao)
+constructor(
+    private val ioScope: CoroutineScope,
+    private val taskDao: TaskDao)
 {
     fun getCompletedTasks() = taskDao.getCompletedTasks()
     fun getIncompleteTasks() = taskDao.getIncompleteTasks()
     fun getTask(taskId: Int) = taskDao.getTask(taskId)
     fun insertTask(task: Task)
     {
-        runBlocking {
+        ioScope.launch {
             taskDao.insertTask(task)
         }
     }
     fun updateTask(task: Task)
     {
-        runBlocking {
+        ioScope.launch {
             taskDao.updateTask(task)
         }
     }
     fun deleteTask(taskId: Int)
     {
-        runBlocking {
+        ioScope.launch {
             taskDao.deleteTask(taskId)
         }
     }
     fun completeTask(taskId: Int)
     {
-        runBlocking {
+        ioScope.launch {
             taskDao.completeTask(taskId)
         }
     }
     fun uncompleteTask(taskId: Int)
     {
-        runBlocking {
+        ioScope.launch {
             taskDao.uncompleteTask(taskId)
         }
     }

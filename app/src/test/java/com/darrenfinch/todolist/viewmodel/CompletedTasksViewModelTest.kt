@@ -20,9 +20,8 @@ private const val TASK_ID = 0
 
 class CompletedTasksViewModelTest
 {
-
     //region Helper Fields -------------------------------------------------------------------------
-    private val TEST_TASKS = TestTasksCreator.getSampleCompletedTasks()
+    private val TEST_TASKS = TestTasksCreator.getCompletedTasks()
 
     private val testTasksLiveData = mockk<MutableLiveData<List<Task>>>()
     private val application = mockk<Application>()
@@ -45,7 +44,7 @@ class CompletedTasksViewModelTest
     {
         stubRepositoryGetCompletedTasksToReturnEmptyLiveData()
         SUT.getTasks()
-        verify { repository.getIncompleteTasks() }
+        verify { repository.getCompletedTasks() }
         confirmVerified(repository)
     }
 

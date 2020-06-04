@@ -1,8 +1,7 @@
 package com.darrenfinch.todolist.view.helpers
 
 import com.darrenfinch.todolist.model.room.Task
-import com.darrenfinch.todolist.model.TimeUnit
-import java.util.*
+import com.darrenfinch.todolist.model.room.TimeUnit
 
 object ExampleTasksCreator
 {

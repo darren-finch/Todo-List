@@ -21,7 +21,7 @@ private const val TASK_ID = 1
 class EditTaskViewModelTest
 {
     //region Helper Fields -------------------------------------------------------------------------
-    private val testTask = TestTasksCreator.getSampleTask()
+    private val testTask = TestTasksCreator.getTask()
     private val testTaskLiveData = mockk<LiveData<Task>>()
 
     private val repository = mockk<TaskRepository>(relaxUnitFun = true)
