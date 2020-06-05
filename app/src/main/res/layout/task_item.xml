@@ -41,8 +41,9 @@
 
                 <TextView
                     android:id="@+id/taskNameTextView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/standard_margin"
                     android:text="@{task.name}"
                     android:textAppearance="@style/H4Dark"
                     app:layout_constraintBottom_toBottomOf="parent"
