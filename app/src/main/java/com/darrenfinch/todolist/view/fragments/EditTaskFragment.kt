@@ -70,7 +70,13 @@ class EditTaskFragment : Fragment() {
         else
             editTaskViewModel.updateTask(task)
 
-        navigateUp()
+        navigateToIncompleteTasks()
+    }
+    //When navigating back manually, the fragment is actually recreated.
+    private fun navigateToIncompleteTasks()
+    {
+        val directions = EditTaskFragmentDirections.actionEditTasksFragmentToAllTasksViewPagerFragment()
+        view?.findNavController()?.navigate(directions)
     }
 
     private fun navigateUp() {

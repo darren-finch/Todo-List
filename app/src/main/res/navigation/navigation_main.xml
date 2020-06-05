@@ -14,6 +14,7 @@
             app:destination="@id/editTasksFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
@@ -26,5 +27,11 @@
             android:name="taskId"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_editTasksFragment_to_allTasksViewPagerFragment"
+            app:destination="@id/allTasksViewPagerFragment"
+            app:enterAnim="@anim/fragment_close_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popUpTo="@id/editTasksFragment" />
     </fragment>
 </navigation>

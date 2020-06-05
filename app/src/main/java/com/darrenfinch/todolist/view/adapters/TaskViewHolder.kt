@@ -35,11 +35,12 @@ class TaskViewHolder(val listener: Listener, itemView: View) : RecyclerView.View
         binding.taskNameTextView.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
     }
 
+    fun getVisibilityIfTaskIsComplete() = if(task.isComplete) View.GONE else View.VISIBLE
     fun getTimeToCompleteWithUnit() =
         DatabindingUtil.putTogetherTimeAndUnit(task.estimatedTTC, task.estimatedTTCUnit)
-
     fun getScheduledDateAsString() = DatabindingUtil.dateStringFromLong(task.scheduledDate)
-    fun getDateOfCompletionAsString() = DatabindingUtil.dateStringFromLong(task.dateOfCompletion)
+    fun getDateOfCompletionAsString() = "${itemView.context.getString(R.string.completed_on)} ${DatabindingUtil.dateStringFromLong(task.dateOfCompletion)}"
+
     fun inverseExpandedWithAnimation() {
         if (!task.isComplete) {
             if (isExpanded)
